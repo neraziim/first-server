@@ -2,10 +2,10 @@
   "name": "first-express",
   "version": "0.0.1",
   "description": "learn express",
-  "main": "/src/server.js",
+  "main": "./src/server.js",
   "type": "module",
   "scripts": {
-    "dev": "node src/server.js",
+    "dev": "nodemon --watch ./src/server.js",
     "format": "prettier --write src/*.js",
     "lint": "eslint .",
     "format:check": "prettier --check src/**/*.js",
@@ -24,11 +24,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "nanoid": "^5.1.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
+    "nodemon": "^3.1.11",
     "prettier": "^3.7.4"
   }
 }
