@@ -1,6 +1,7 @@
 import express from 'express';
 // import { users } from '../dlrpehlfRkbb';
 // import { nanoid } from 'nanoid'; //너무 험난한 여정이 될 것 같아서 주석처리함. 언젠가 할 수 있겠죠
+import { dataValidator } from '../middlewares/dataValidator.middleware.js';
 
 export const userRouter = express.Router();
 
@@ -45,9 +46,10 @@ userRouter.get('/:id', (req, res) => {
 });
 
 //POST new user
-userRouter.post('/', (req, res) => {
+userRouter.post('/', dataValidator, (req, res) => {
   //request body의 name과 email property를 변수 name, email에 할당
   const { name, email } = req.body;
+
   //실패 response : 미입력 검증
   //name '또는' email 누락인 경우
   if (!name || !email) {
@@ -83,7 +85,7 @@ userRouter.post('/', (req, res) => {
 });
 
 //PUT user(update)
-userRouter.put('/:id', (req, res) => {
+userRouter.put('/:id', dataValidator, (req, res) => {
   const id = parseInt(req.params.id); //request의 id값을(아무튼 인티저로 바꿔버리고) 선언된 변수 id에 할당
   //request body의 name과 email property를 변수 name, email에 할당
   const { name, email } = req.body;
