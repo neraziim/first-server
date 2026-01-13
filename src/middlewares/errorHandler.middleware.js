@@ -1,4 +1,4 @@
-import { HttpException } from '../errors/http.Exception';
+import { HttpException } from '../errors/http.Exception.js';
 
 //인자 4개면 error 받는 미들웨어로 인식한다.
 //(강사님 주석: next를 지우면 안됨! Express가 에러 미들웨어로 인식하려면 4개 인자 필수)

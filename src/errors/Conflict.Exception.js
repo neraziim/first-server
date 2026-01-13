@@ -1,5 +1,5 @@
 //HttpException 불러오기
-import { HttpException } from './http.Exception';
+import { HttpException } from './http.Exception.js';
 
 //ConflictException 클래스 만들어서 내보내기, HttpException 클래스 상속받기
 export class ConflictException extends HttpException {
