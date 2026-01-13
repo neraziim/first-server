@@ -1,4 +1,7 @@
 node_modules/
-.env
+#환경파일이 git에 올라가면 안 된다.
+env/*
+#예외설정 !
+!env/.env.example
 .DS_Store
 dist/
