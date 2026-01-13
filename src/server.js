@@ -4,8 +4,10 @@ import { router } from './routes/index.js';
 import { logger } from './middlewares/logger.middleware.js';
 import { requestTimer } from './middlewares/requestTimer.middleware.js';
 import { errorHandler } from './middlewares/errorHandler.middleware.js';
+import { connectDB, disconnectDB } from './db/index.js';
 
 const app = express();
+connectDB(); // DB 연결
 
 //Middlewares
 //개발 환경에서만 로깅 미들웨어 사용
@@ -32,7 +34,19 @@ app.use('/', router);
 app.use(errorHandler);
 
 // 서버 시작(문은 제일 마지막에 연다)
-app.listen(config.PORT, ()=> {
+const server = app.listen(config.PORT, ()=> {
   console.log(`🚀 Server running on port ${config.PORT}`);
   console.log(`📦 Environment: ${config.NODE_ENV}`);
 });
+
+// Graceful Shutdown
+const shutdown = (signal) => {
+  console.log(`\n${signal} received. Shutting down gracefully...`);
+  server.close(() => {
+    console.log('HTTP server closed.');
+    disconnectDB();
+  });
+};
+
+process.on('SIGINT', () => shutdown('SIGINT'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));
