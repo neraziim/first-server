@@ -12,7 +12,7 @@ export default [
       },
     },
     rules: {
-      'no-unused-vars': 'warn',
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],//_미사용변수 무시
       'no-console': 'off',
       'prefer-const': 'error',
       'no-var': 'error',
