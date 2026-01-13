@@ -2,6 +2,7 @@ import express from 'express';
 import { router } from './routes/index.js';
 import { logger } from './middlewares/logger.middleware.js';
 import { requestTimer } from './middlewares/requestTimer.middleware.js';
+import { errorHandler } from './middlewares/errorHandler.middleware.js';
 
 const app = express();
 const PORT = 5001;
@@ -25,6 +26,9 @@ app.use(requestTimer);
 
 //모든 라우트 등록
 app.use('/', router);
+
+//error handler (제일 마지막)
+app.use(errorHandler);
 
 // 서버 시작(문은 제일 마지막에 연다)
 app.listen(PORT, () => {
